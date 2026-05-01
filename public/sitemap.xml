@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Top-level pagina's -->
+  <url><loc>https://zakelijk.proman.be/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://zakelijk.proman.be/over/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/offerte/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <!-- Diensten -->
+  <url><loc>https://zakelijk.proman.be/diensten/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://zakelijk.proman.be/diensten/uitzendarbeid/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://zakelijk.proman.be/diensten/werving-en-selectie/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://zakelijk.proman.be/diensten/payroll/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://zakelijk.proman.be/diensten/executive-search/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://zakelijk.proman.be/diensten/outplacement/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://zakelijk.proman.be/diensten/talent-assessment/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- Merken -->
+  <url><loc>https://zakelijk.proman.be/merken/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/merken/proman-jobs/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/merken/proman-home/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/merken/proman-care/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/merken/ascento/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/merken/winsearch/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/merken/amplo/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Sectoren -->
+  <url><loc>https://zakelijk.proman.be/sectoren/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/industrie/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/logistiek/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/bouw/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/it-en-tech/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/zorg/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/retail/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/sectoren/finance/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Regio's (local SEO — hoge prioriteit) -->
+  <url><loc>https://zakelijk.proman.be/regios/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/antwerpen/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/brussel/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/oost-vlaanderen/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/west-vlaanderen/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/limburg/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/vlaams-brabant/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/henegouwen/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/luik/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/luxemburg/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/namen/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://zakelijk.proman.be/regios/waals-brabant/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Cases -->
+  <url><loc>https://zakelijk.proman.be/cases/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/cases/voedingsproducent-zomerpiek/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zakelijk.proman.be/cases/cfo-fusietraject/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zakelijk.proman.be/cases/wzc-zorgpoule/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+
+  <!-- Kennisbank -->
+  <url><loc>https://zakelijk.proman.be/kennisbank/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/kennisbank/uitzend-vs-vast-wanneer-kies-je-wat/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/kennisbank/wat-kost-een-uitzendkracht-in-2026/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://zakelijk.proman.be/kennisbank/employer-branding-tekortmarkt/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>

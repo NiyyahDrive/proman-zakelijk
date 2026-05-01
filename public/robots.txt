@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zakelijk.proman.be/sitemap-index.xml
+Sitemap: https://zakelijk.proman.be/sitemap.xml
