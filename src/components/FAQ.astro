@@ -1,0 +1,33 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  faqs: { q: string; a: string }[];
+}
+const { title = 'Veelgestelde vragen', subtitle, faqs } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-narrow">
+    <div class="text-center mb-10">
+      <span class="eyebrow text-proman-orange">FAQ</span>
+      <h2 class="heading-lg mt-3 mb-4 text-balance">{title}</h2>
+      {subtitle && <p class="lead text-balance">{subtitle}</p>}
+    </div>
+    <div class="space-y-3">
+      {faqs.map(faq => (
+        <details class="card p-0 group">
+          <summary class="cursor-pointer p-5 md:p-6 flex items-start justify-between gap-4 hover:bg-proman-cream rounded-2xl">
+            <span class="font-bold text-base md:text-lg leading-snug">{faq.q}</span>
+            <svg class="w-5 h-5 mt-1 shrink-0 text-proman-orange transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 md:px-6 pb-5 md:pb-6 text-proman-navy/80 leading-relaxed">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

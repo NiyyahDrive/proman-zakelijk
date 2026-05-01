@@ -1,0 +1,159 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTASection from '../../components/CTASection.astro';
+import { brands, getBrand } from '../../data/brands.ts';
+import { services } from '../../data/services.ts';
+import { sectors } from '../../data/sectors.ts';
+import { faqSchema, breadcrumbSchema } from '../../utils/seo.ts';
+
+export function getStaticPaths() {
+  return brands.map(b => ({ params: { slug: b.slug } }));
+}
+
+const { slug } = Astro.params;
+const brand = getBrand(slug!)!;
+
+const linkedServices = services.filter(s => brand.services.includes(s.slug));
+const linkedSectors = sectors.filter(s => brand.sectors.includes(s.slug));
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Merken', url: 'https://zakelijk.proman.be/merken/' },
+  { name: brand.name, url: `https://zakelijk.proman.be/merken/${brand.slug}/` },
+];
+
+const colorClasses: Record<string, { ring: string; bg: string; text: string; border: string }> = {
+  jobs: { ring: 'ring-brand-jobs', bg: 'bg-brand-jobs', text: 'text-brand-jobs', border: 'border-brand-jobs' },
+  home: { ring: 'ring-brand-home', bg: 'bg-brand-home', text: 'text-brand-home', border: 'border-brand-home' },
+  care: { ring: 'ring-brand-care', bg: 'bg-brand-care', text: 'text-brand-care', border: 'border-brand-care' },
+  ascento: { ring: 'ring-brand-ascento', bg: 'bg-brand-ascento', text: 'text-brand-ascento', border: 'border-brand-ascento' },
+  winsearch: { ring: 'ring-brand-winsearch', bg: 'bg-brand-winsearch', text: 'text-brand-winsearch', border: 'border-brand-winsearch' },
+  amplo: { ring: 'ring-brand-amplo', bg: 'bg-brand-amplo', text: 'text-brand-amplo', border: 'border-brand-amplo' },
+};
+const c = colorClasses[brand.color];
+---
+
+<Base
+  title={brand.seo.title}
+  description={brand.seo.description}
+  schema={[faqSchema(brand.faqs), breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow={`PROMAN-merk · Voor ${brand.forWho.split(',')[0].toLowerCase()}`}
+    title={brand.tagline}
+    subtitle={brand.pitch}
+    brandColor={brand.color}
+    breadcrumbs={breadcrumbs}
+  >
+    <div class="flex flex-col sm:flex-row gap-3 mt-8">
+      <a href="/offerte/" class="bg-white text-proman-navy hover:bg-proman-cream font-bold px-6 py-3.5 rounded-lg transition-colors inline-flex items-center gap-2">
+        Vraag een offerte
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+      <a href="/cases/" class="border-2 border-white/30 hover:border-white text-white font-semibold px-6 py-3.5 rounded-lg transition-colors text-center">
+        Bekijk cases
+      </a>
+    </div>
+  </PageHero>
+
+  <!-- Voor wie -->
+  <section class="section bg-white">
+    <div class="container-app grid lg:grid-cols-3 gap-10 lg:gap-16">
+      <div class="lg:col-span-1">
+        <span class="eyebrow text-proman-orange">Voor wie</span>
+        <h2 class="heading-md mt-3 text-balance">Werken met {brand.name} loont voor</h2>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="text-lg md:text-xl text-proman-navy/85 leading-relaxed mb-8">
+          {brand.forWho}
+        </p>
+        <div class="grid sm:grid-cols-3 gap-6">
+          {brand.usps.map(u => (
+            <div class="border-l-4 pl-4 py-1" style={`border-color: var(--tw-${c.border})`}>
+              <div class="text-3xl mb-2">{u.icon}</div>
+              <div class="font-bold text-base mb-1">{u.title}</div>
+              <div class="text-sm text-proman-navy/70 leading-relaxed">{u.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases -->
+  <section class="section bg-proman-cream">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Cases</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">Wat {brand.name} oplevert in de praktijk</h2>
+        <p class="lead text-balance">Drie referentiecases waarin {brand.name} concrete resultaten leverde voor Belgische werkgevers.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {brand.caseHighlights.map(cs => (
+          <div class="card card-padding">
+            <div class:list={['inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4', c.bg, 'text-white']}>
+              {brand.name}
+            </div>
+            <p class="text-base text-proman-navy/85 leading-relaxed mb-4">{cs.client}</p>
+            <p class="font-bold text-lg text-balance">{cs.result}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/cases/" class="inline-flex items-center gap-2 font-semibold text-proman-orange hover:underline">
+          Bekijk alle cases →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diensten van dit merk -->
+  <section class="section">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Diensten</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">Welke diensten levert {brand.name}?</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {linkedServices.map(s => (
+          <a href={`/diensten/${s.slug}/`} class="card card-padding hover:border-proman-orange transition-colors group">
+            <div class="text-2xl mb-3">{s.icon}</div>
+            <h3 class="font-bold text-lg mb-2 group-hover:text-proman-orange transition-colors">{s.name}</h3>
+            <p class="text-sm text-proman-navy/70 leading-relaxed">{s.pitch.split('.')[0]}.</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sectoren waar dit merk sterk in is -->
+  {linkedSectors.length > 0 && (
+    <section class="section bg-proman-cream">
+      <div class="container-app">
+        <div class="max-w-3xl mb-10">
+          <span class="eyebrow text-proman-orange">Sectoren</span>
+          <h2 class="heading-md mt-3 mb-4 text-balance">In welke sectoren is {brand.name} actief?</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          {linkedSectors.map(s => (
+            <a href={`/sectoren/${s.slug}/`} class="inline-flex items-center gap-2 bg-white border border-proman-navy/15 hover:border-proman-orange rounded-full px-5 py-2.5 font-semibold text-sm transition-colors">
+              <span>{s.icon}</span>
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <FAQ
+    title={`Veelgestelde vragen over ${brand.name}`}
+    faqs={brand.faqs}
+  />
+  <CTASection
+    title={`Klaar om met ${brand.name} aan de slag te gaan?`}
+    subtitle="Vraag een offerte op maat. Een lokale specialist contacteert je binnen 1 werkdag."
+  />
+</Base>

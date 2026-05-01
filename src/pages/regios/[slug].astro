@@ -1,0 +1,135 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { regions, getRegion } from '../../data/regions.ts';
+import { sectors } from '../../data/sectors.ts';
+import { localBusinessSchema, breadcrumbSchema } from '../../utils/seo.ts';
+
+export function getStaticPaths() {
+  return regions.map(r => ({ params: { slug: r.slug } }));
+}
+
+const { slug } = Astro.params;
+const region = getRegion(slug!)!;
+const linkedSectors = sectors.filter(s => region.dominantSectors.includes(s.slug));
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Regio\'s', url: 'https://zakelijk.proman.be/regios/' },
+  { name: region.name, url: `https://zakelijk.proman.be/regios/${region.slug}/` },
+];
+---
+
+<Base
+  title={region.seo.title}
+  description={region.seo.description}
+  schema={[
+    localBusinessSchema({
+      name: `PROMAN ${region.name}`,
+      city: region.cities[0],
+      streetAddress: 'Lokaal kantoor',
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <PageHero
+    eyebrow="Regio"
+    title={`Personeel zoeken in ${region.name}`}
+    subtitle={region.pitch}
+    breadcrumbs={breadcrumbs}
+  >
+    <div class="flex flex-col sm:flex-row gap-3 mt-8">
+      <a href="/offerte/" class="btn-primary btn-large">Vraag offerte voor {region.name}</a>
+      <a href="tel:+3221234567" class="border-2 border-white/30 hover:border-white text-white font-semibold px-6 py-4 rounded-lg text-center">Bel direct</a>
+    </div>
+    <div class="mt-12 grid sm:grid-cols-3 gap-6 max-w-2xl">
+      <div>
+        <div class="text-3xl font-extrabold text-proman-orange-light">{region.offices}</div>
+        <div class="text-sm text-white/70 mt-1">Kantoren in regio</div>
+      </div>
+      <div>
+        <div class="text-3xl font-extrabold text-proman-orange-light">{region.cities.length}+</div>
+        <div class="text-sm text-white/70 mt-1">Steden gedekt</div>
+      </div>
+      <div>
+        <div class="text-3xl font-extrabold text-proman-orange-light">48u</div>
+        <div class="text-sm text-white/70 mt-1">Invultijd</div>
+      </div>
+    </div>
+  </PageHero>
+
+  <!-- Steden -->
+  <section class="section bg-white">
+    <div class="container-app grid lg:grid-cols-3 gap-10">
+      <div>
+        <span class="eyebrow text-proman-orange">Lokale aanwezigheid</span>
+        <h2 class="heading-md mt-3 text-balance">PROMAN in {region.name}</h2>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="text-lg text-proman-navy/85 leading-relaxed mb-6">
+          We hebben {region.offices} kantoren in {region.name}, met consulenten die de regio en de bedrijven kennen. Hieronder de belangrijkste steden waar we actief zijn:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {region.cities.map(c => (
+            <span class="inline-flex items-center bg-proman-cream text-proman-navy rounded-full px-4 py-1.5 text-sm font-semibold">
+              {c}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sterkste sectoren in deze regio -->
+  {linkedSectors.length > 0 && (
+    <section class="section bg-proman-cream">
+      <div class="container-app">
+        <div class="max-w-3xl mb-10">
+          <span class="eyebrow text-proman-orange">Sterke sectoren</span>
+          <h2 class="heading-md mt-3 mb-4 text-balance">Sectoren waar we sterk staan in {region.name}</h2>
+          <p class="lead text-balance">Onze regionale poule is het diepst in deze sectoren — typisch waar de regionale economie zich ook op concentreert.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {linkedSectors.map(s => (
+            <a href={`/sectoren/${s.slug}/`} class="card group overflow-hidden p-0">
+              <div class:list={['bg-gradient-to-br', s.bgGradient, 'p-6 text-white']}>
+                <div class="text-3xl mb-3">{s.icon}</div>
+                <h3 class="font-bold text-lg leading-tight">{s.name}</h3>
+              </div>
+              <div class="p-4 text-sm text-proman-orange font-semibold">
+                Bekijk {s.name.toLowerCase()} →
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Lokale cases -->
+  {region.localCases.length > 0 && (
+    <section class="section bg-white">
+      <div class="container-app">
+        <div class="max-w-3xl mb-10">
+          <span class="eyebrow text-proman-orange">Lokale cases</span>
+          <h2 class="heading-md mt-3 mb-4 text-balance">Resultaten in {region.name}</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          {region.localCases.map(cs => (
+            <div class="card card-padding">
+              <div class="text-xs text-proman-navy/60 uppercase tracking-widest font-semibold mb-3">{region.name}</div>
+              <p class="text-base text-proman-navy/85 leading-relaxed mb-3">{cs.client}</p>
+              <p class="font-bold text-lg text-balance">{cs.result}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CTASection
+    title={`Personeel zoeken in ${region.name}?`}
+    subtitle="Een lokale consulent uit jouw regio belt je binnen 1 werkdag terug."
+  />
+</Base>

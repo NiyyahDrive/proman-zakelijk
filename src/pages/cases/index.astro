@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+const allCases = await getCollection('cases');
+const sortedCases = allCases.sort((a, b) =>
+  b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Cases', url: 'https://zakelijk.proman.be/cases/' },
+];
+---
+
+<Base
+  title="Klantcases — concrete resultaten van PROMAN"
+  description="Echte cases van werkgevers die HR-uitdagingen oplosten met PROMAN. Van seizoenpieken tot CFO-opvolging. Cijfers, context, lessen."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Cases"
+    title="Resultaten, niet beloftes"
+    subtitle="Werkgevers vertellen wat PROMAN leverde — in cijfers, in tijd, in retentie. Geen casus is gefingeerd; namen zijn op aanvraag deelbaar bij intake."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section bg-white">
+    <div class="container-app">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedCases.map(c => (
+          <a href={`/cases/${c.slug}/`} class="card overflow-hidden group flex flex-col">
+            <div class="bg-gradient-to-br from-proman-navy to-proman-navy-dark p-6 md:p-8 text-white">
+              <div class="text-xs uppercase tracking-widest opacity-70 mb-2">{c.data.industry}</div>
+              <h2 class="font-bold text-xl md:text-2xl leading-tight group-hover:text-proman-orange-light transition-colors">{c.data.title}</h2>
+              <div class="mt-4 grid grid-cols-3 gap-2">
+                {c.data.metrics.slice(0, 3).map(m => (
+                  <div>
+                    <div class="text-2xl font-extrabold text-proman-orange-light">{m.value}</div>
+                    <div class="text-xs text-white/70 mt-0.5">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="card-padding flex-1 flex flex-col">
+              <div class="text-xs text-proman-navy/60 mb-2">{c.data.client}</div>
+              <p class="text-sm text-proman-navy/75 leading-relaxed flex-1">{c.data.description}</p>
+              <div class="mt-4 text-sm font-semibold text-proman-orange flex items-center gap-1 group-hover:gap-2 transition-all">
+                Lees deze case →
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Wil je je eigen case toevoegen?"
+    subtitle="Werk samen met PROMAN. Een lokale consulent contacteert je binnen 1 werkdag."
+  />
+</Base>

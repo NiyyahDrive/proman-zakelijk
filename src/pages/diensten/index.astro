@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import CTASection from '../../components/CTASection.astro';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Diensten', url: 'https://zakelijk.proman.be/diensten/' },
+];
+---
+
+<Base
+  title="HR-diensten voor werkgevers — uitzend, werving, payroll, executive search"
+  description="Het volledige PROMAN-aanbod: uitzendarbeid, werving en selectie, payroll, executive search, outplacement en talent assessment. Voor werkgevers in heel België."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Diensten"
+    title="Het volledige HR-aanbod onder één dak"
+    subtitle="Van urgent uitzendpersoneel tot discrete executive search. Elke dienst geleverd door het PROMAN-merk dat er gespecialiseerd in is."
+    breadcrumbs={breadcrumbs}
+  />
+  <ServiceGrid />
+  <CTASection />
+</Base>

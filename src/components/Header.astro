@@ -1,0 +1,137 @@
+---
+const navItems = [
+  {
+    label: 'Diensten',
+    href: '/diensten/',
+    sublinks: [
+      { label: 'Uitzendarbeid', href: '/diensten/uitzendarbeid/' },
+      { label: 'Werving & Selectie', href: '/diensten/werving-en-selectie/' },
+      { label: 'Payroll', href: '/diensten/payroll/' },
+      { label: 'Executive Search', href: '/diensten/executive-search/' },
+      { label: 'Outplacement', href: '/diensten/outplacement/' },
+      { label: 'Talent Assessment', href: '/diensten/talent-assessment/' },
+    ],
+  },
+  {
+    label: 'Merken',
+    href: '/merken/',
+    sublinks: [
+      { label: 'PROMAN Jobs', href: '/merken/proman-jobs/' },
+      { label: 'PROMAN Home', href: '/merken/proman-home/' },
+      { label: 'PROMAN Care', href: '/merken/proman-care/' },
+      { label: 'Ascento', href: '/merken/ascento/' },
+      { label: 'Winsearch', href: '/merken/winsearch/' },
+      { label: 'Amplo', href: '/merken/amplo/' },
+    ],
+  },
+  {
+    label: 'Sectoren',
+    href: '/sectoren/',
+    sublinks: [
+      { label: 'Industrie & Productie', href: '/sectoren/industrie/' },
+      { label: 'Logistiek & Transport', href: '/sectoren/logistiek/' },
+      { label: 'Bouw & Techniek', href: '/sectoren/bouw/' },
+      { label: 'IT & Tech', href: '/sectoren/it-en-tech/' },
+      { label: 'Zorg & Welzijn', href: '/sectoren/zorg/' },
+      { label: 'Retail & Hospitality', href: '/sectoren/retail/' },
+      { label: 'Finance & Banking', href: '/sectoren/finance/' },
+    ],
+  },
+  { label: 'Cases', href: '/cases/' },
+  { label: 'Kennisbank', href: '/kennisbank/' },
+  { label: 'Over ons', href: '/over/' },
+];
+---
+
+<header class="bg-white border-b border-proman-navy/10 sticky top-0 z-40 shadow-sm">
+  <div class="container-app py-3 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2 shrink-0" aria-label="PROMAN Zakelijk">
+      <div class="w-9 h-9 rounded-lg bg-proman-orange flex items-center justify-center text-white font-extrabold text-lg shadow-soft">P</div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-lg tracking-tight text-proman-navy">PROMAN</span>
+        <span class="text-[10px] font-semibold text-proman-orange uppercase tracking-widest">Zakelijk</span>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-proman-navy" aria-label="Hoofdnavigatie">
+      {navItems.map(item => (
+        <div class="relative group">
+          <a href={item.href} class="hover:text-proman-orange transition-colors py-2 inline-block">
+            {item.label}
+            {item.sublinks && (
+              <svg class="w-3 h-3 inline-block ml-0.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            )}
+          </a>
+          {item.sublinks && (
+            <div class="absolute left-0 top-full mt-1 w-64 bg-white border border-proman-navy/10 rounded-xl shadow-lift opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-2">
+              {item.sublinks.map(sub => (
+                <a href={sub.href} class="block px-3 py-2 rounded-lg hover:bg-proman-cream text-proman-navy/80 hover:text-proman-orange text-sm">
+                  {sub.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="tel:+3221234567" class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-proman-navy/80 hover:text-proman-orange">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        02 123 45 67
+      </a>
+      <a href="/offerte/" class="hidden md:inline-flex btn-primary text-sm py-2.5">
+        Vraag offerte
+      </a>
+      <button data-menu-btn class="lg:hidden p-2 rounded-lg hover:bg-proman-cream" aria-label="Menu">
+        <svg class="w-6 h-6 text-proman-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile menu */}
+  <div data-menu class="hidden lg:hidden fixed inset-0 z-50 bg-proman-navy text-white overflow-y-auto">
+    <div class="container-app py-5 flex items-center justify-between border-b border-white/10">
+      <span class="font-extrabold text-xl tracking-tight">PROMAN Zakelijk</span>
+      <button data-menu-close class="p-2 rounded-lg hover:bg-white/10" aria-label="Sluit menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6l-12 12" />
+        </svg>
+      </button>
+    </div>
+    <nav class="container-app py-6 flex flex-col" aria-label="Mobiele navigatie">
+      {navItems.map(item => (
+        <details class="border-b border-white/10 group">
+          <summary class="py-4 font-bold text-lg cursor-pointer flex items-center justify-between hover:text-proman-orange-light">
+            {item.label}
+            {item.sublinks && (
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            )}
+          </summary>
+          {item.sublinks ? (
+            <div class="pb-3 pl-2 space-y-1">
+              <a href={item.href} class="block py-1.5 text-sm text-white/70 hover:text-white">→ Overzicht {item.label.toLowerCase()}</a>
+              {item.sublinks.map(sub => (
+                <a href={sub.href} class="block py-1.5 text-sm text-white/80 hover:text-white">{sub.label}</a>
+              ))}
+            </div>
+          ) : (
+            <a href={item.href} class="block pb-3 text-sm text-white/70">→ Bekijk</a>
+          )}
+        </details>
+      ))}
+      <a href="/offerte/" class="mt-6 bg-proman-orange text-white text-center font-bold py-4 rounded-lg">
+        Vraag offerte
+      </a>
+      <a href="tel:+3221234567" class="mt-2 border border-white/30 text-white text-center font-semibold py-3 rounded-lg">
+        Bel 02 123 45 67
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+const articles = await getCollection('articles');
+const sorted = articles.sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+const featured = sorted.find(a => a.data.featured) ?? sorted[0];
+const rest = sorted.filter(a => a.slug !== featured.slug);
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Kennisbank', url: 'https://zakelijk.proman.be/kennisbank/' },
+];
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  title="Kennisbank — HR-inzichten voor werkgevers"
+  description="Praktische artikelen over uitzendarbeid, werving, payroll, sectorale cao's en HR-trends. Geschreven voor HR-managers en werkgevers in België."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Kennisbank"
+    title="HR-inzichten zonder bullshit"
+    subtitle="Praktische artikelen over personeelsbeheer, sectorale regelgeving en wervingsstrategie. Geschreven door consulenten met eelt op de handen."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section bg-white">
+    <div class="container-app">
+      <a href={`/kennisbank/${featured.slug}/`} class="card overflow-hidden grid md:grid-cols-2 gap-0 mb-10 group">
+        <div class="bg-gradient-to-br from-proman-navy via-proman-navy to-proman-navy-dark p-8 md:p-12 text-white flex flex-col justify-between min-h-[300px]">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-proman-orange text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+              Uitgelicht
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4 group-hover:text-proman-orange-light transition-colors">{featured.data.title}</h2>
+            <p class="text-base md:text-lg text-white/80 leading-relaxed">{featured.data.description}</p>
+          </div>
+          <div class="mt-6 flex items-center gap-4 text-xs text-white/70">
+            <span>{formatDate(featured.data.publishedAt)}</span>
+            <span>·</span>
+            <span>{featured.data.readingTime} min lezen</span>
+            <span>·</span>
+            <span class="bg-white/15 px-2.5 py-0.5 rounded-full">{featured.data.category}</span>
+          </div>
+        </div>
+        <div class="bg-proman-cream p-8 md:p-12 flex items-center">
+          <div>
+            <div class="text-7xl mb-4 opacity-40">📰</div>
+            <p class="text-sm text-proman-navy/70 leading-relaxed mb-4">
+              {featured.data.tags.length} tags · {featured.data.author}
+            </p>
+            <div class="text-base font-semibold text-proman-orange flex items-center gap-1 group-hover:gap-2 transition-all">
+              Lees het volledige artikel
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {rest.map(a => (
+          <a href={`/kennisbank/${a.slug}/`} class="card card-padding hover:border-proman-orange transition-colors group">
+            <div class="flex items-center gap-2 text-xs mb-3">
+              <span class="bg-proman-orange/10 text-proman-orange-dark font-bold px-2 py-0.5 rounded uppercase tracking-wider">{a.data.category}</span>
+              <span class="text-proman-navy/50">{a.data.readingTime} min</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2 leading-tight group-hover:text-proman-orange transition-colors">{a.data.title}</h3>
+            <p class="text-sm text-proman-navy/70 leading-relaxed mb-4 line-clamp-3">{a.data.description}</p>
+            <div class="text-xs text-proman-navy/50">{formatDate(a.data.publishedAt)}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Wil je advies op maat?"
+    subtitle="Onze consulenten denken graag mee over jouw HR-uitdagingen — zonder verkooppraat."
+  />
+</Base>

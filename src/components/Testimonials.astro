@@ -1,0 +1,58 @@
+---
+const testimonials = [
+  {
+    quote: 'PROMAN levert ons al 4 jaar de logistieke flex-pool voor onze e-commerce-pieken. Black Friday verloopt vlekkeloos, omdat ze maanden vooraf plannen. Geen enkel ander bureau doet dat zo gestructureerd.',
+    author: 'Sophie D.',
+    role: 'Operations Director',
+    company: 'E-commerce groep, Vlaams-Brabant',
+    metric: '180 orderpickers',
+    metricLabel: 'voor Q4-piek',
+  },
+  {
+    quote: 'Onze CFO ging onverwacht weg, midden in een fusietraject. Winsearch leverde binnen 8 weken een opvolger met fusie-ervaring én cultuur-fit. Discreet, snel, professioneel.',
+    author: 'Tom V.',
+    role: 'CEO',
+    company: 'Industriele groep, Mechelen',
+    metric: '8 weken',
+    metricLabel: 'tot ondertekend contract',
+  },
+  {
+    quote: 'PROMAN Care begrijpt zorg. Geen generieke recruiters, maar mensen die weten wat een hoofdverpleegkundige nodig heeft op een 84-bedden afdeling. Dat verschil voel je in de kwaliteit van de matches.',
+    author: 'Lieve M.',
+    role: 'HR-directeur',
+    company: 'WZC-groep, Antwerpen',
+    metric: '78%',
+    metricLabel: 'retentie na 12 maanden',
+  },
+];
+---
+
+<section class="section bg-proman-cream">
+  <div class="container-app">
+    <div class="max-w-3xl mb-10 md:mb-14">
+      <span class="eyebrow text-proman-orange">Klanten aan het woord</span>
+      <h2 class="heading-lg mt-3 mb-4 text-balance">Resultaten, niet beloftes</h2>
+      <p class="lead text-balance">
+        Drie HR-beslissers over waarom ze blijven kiezen voor PROMAN. Cijfers controleerbaar, namen op aanvraag.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonials.map(t => (
+        <figure class="card card-padding flex flex-col">
+          <div class="text-yellow-500 text-lg mb-3" aria-hidden="true">★★★★★</div>
+          <blockquote class="text-base text-proman-navy/85 leading-relaxed mb-6 flex-1 italic">
+            "{t.quote}"
+          </blockquote>
+          <div class="pt-4 border-t border-proman-navy/10">
+            <div class="text-3xl font-extrabold text-proman-orange leading-none">{t.metric}</div>
+            <div class="text-xs text-proman-navy/60 uppercase tracking-wide mt-1 mb-3">{t.metricLabel}</div>
+            <figcaption class="text-sm">
+              <strong>{t.author}</strong>
+              <div class="text-proman-navy/60 text-xs mt-0.5">{t.role} · {t.company}</div>
+            </figcaption>
+          </div>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

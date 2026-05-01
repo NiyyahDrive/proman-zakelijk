@@ -1,0 +1,48 @@
+---
+const steps = [
+  {
+    n: 1,
+    title: 'Vraag offerte aan',
+    body: 'Vertel ons je vraag in 2 minuten — vacature, sector, regio, urgentie. Online formulier of telefoon.',
+  },
+  {
+    n: 2,
+    title: 'Lokale consulent contacteert je',
+    body: 'Binnen 1 werkdag belt een specialist uit jouw sector en regio. Briefing van 30-60 min, eventueel op locatie.',
+  },
+  {
+    n: 3,
+    title: 'Voorstel binnen 48 uur',
+    body: 'Voor uitzend: voorgescreende kandidaten klaar om te starten. Voor werving: shortlist binnen 2 weken.',
+  },
+  {
+    n: 4,
+    title: 'Wij regelen alles',
+    body: 'Contracten, payroll, attesten, opvolging, vervanging. Eén factuur, één contactpersoon.',
+  },
+];
+---
+
+<section class="section bg-proman-navy text-white relative overflow-hidden">
+  <div class="absolute -top-20 -right-20 w-96 h-96 bg-proman-orange/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="container-app relative">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-proman-orange-light">Hoe het werkt</span>
+      <h2 class="heading-lg mt-3 mb-4 text-balance">Van vraag tot oplossing in 4 stappen</h2>
+      <p class="lead text-white/80 text-balance">
+        Geen lange wervingsprocessen, geen verborgen kosten. Eén workflow die werkt voor 50.000+ werkgevers in België.
+      </p>
+    </div>
+    <ol class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {steps.map(s => (
+        <li class="relative">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-12 h-12 rounded-full bg-proman-orange flex items-center justify-center font-extrabold text-xl shrink-0">{s.n}</div>
+            <div class="font-bold text-lg leading-tight">{s.title}</div>
+          </div>
+          <p class="text-sm text-white/75 leading-relaxed">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

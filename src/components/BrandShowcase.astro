@@ -1,0 +1,101 @@
+---
+// Critical fix voor de feedback "PROMAN Home onderbelicht" — elk merk krijgt EIGEN
+// content-block met eigen kleuren, USP's en CTA. Geen mini-tegels.
+import { brands } from '../data/brands.ts';
+
+const colorMap: Record<string, { bg: string; from: string; to: string; accent: string; pillBg: string }> = {
+  jobs: { bg: 'bg-brand-jobs', from: 'from-brand-jobs-from', to: 'to-brand-jobs-to', accent: 'text-brand-jobs', pillBg: 'bg-orange-50' },
+  home: { bg: 'bg-brand-home', from: 'from-brand-home-from', to: 'to-brand-home-to', accent: 'text-brand-home', pillBg: 'bg-pink-50' },
+  care: { bg: 'bg-brand-care', from: 'from-brand-care-from', to: 'to-brand-care-to', accent: 'text-brand-care', pillBg: 'bg-green-50' },
+  ascento: { bg: 'bg-brand-ascento', from: 'from-brand-ascento-from', to: 'to-brand-ascento-to', accent: 'text-brand-ascento', pillBg: 'bg-blue-50' },
+  winsearch: { bg: 'bg-brand-winsearch', from: 'from-brand-winsearch-from', to: 'to-brand-winsearch-to', accent: 'text-brand-winsearch', pillBg: 'bg-purple-50' },
+  amplo: { bg: 'bg-brand-amplo', from: 'from-brand-amplo-from', to: 'to-brand-amplo-to', accent: 'text-brand-amplo', pillBg: 'bg-teal-50' },
+};
+---
+
+<section class="section bg-white">
+  <div class="container-app">
+    <div class="max-w-3xl mb-12 md:mb-16">
+      <span class="eyebrow text-proman-orange">Zes merken, één partner</span>
+      <h2 class="heading-lg mt-3 mb-4 text-balance">
+        Voor élke HR-vraag het juiste antwoord
+      </h2>
+      <p class="lead text-balance">
+        We hebben de jaren genomen om elk merk te specialiseren in zijn doelgroep. Dat betekent: geen one-size-fits-all, wel diepe expertise per sector. Hieronder: wat elk merk doet, voor wie, en met welke resultaten.
+      </p>
+    </div>
+
+    <div class="space-y-6 lg:space-y-8">
+      {brands.map((brand, i) => {
+        const c = colorMap[brand.color];
+        const reverse = i % 2 === 1;
+        return (
+          <article class:list={[
+            'card overflow-hidden grid lg:grid-cols-2 gap-0',
+            reverse ? 'lg:[&>*:first-child]:order-2' : ''
+          ]}>
+            {/* Visual side */}
+            <div class:list={['relative bg-gradient-to-br', c.from, c.to, 'text-white p-8 md:p-10 lg:p-12 flex flex-col justify-between min-h-[280px] lg:min-h-[420px]']}>
+              <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+              <div class="relative">
+                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+                  Merk #{i + 1}
+                </div>
+                <h3 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3">{brand.name}</h3>
+                <p class="text-lg md:text-xl text-white/90 leading-relaxed mb-6 text-balance">
+                  {brand.tagline}
+                </p>
+              </div>
+              <div class="relative">
+                <div class="text-xs font-semibold uppercase tracking-widest text-white/70 mb-2">Cases</div>
+                <ul class="space-y-2">
+                  {brand.caseHighlights.slice(0, 2).map(c => (
+                    <li class="text-sm md:text-base flex items-start gap-2">
+                      <span class="text-white/60 mt-0.5">▸</span>
+                      <span><strong class="text-white">{c.client}</strong> · {c.result}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Content side */}
+            <div class="p-8 md:p-10 lg:p-12 flex flex-col justify-between">
+              <div>
+                <p class="text-base md:text-lg text-proman-navy/85 leading-relaxed mb-6">
+                  {brand.pitch}
+                </p>
+                <div class:list={['rounded-lg p-4 mb-6', c.pillBg]}>
+                  <div class="text-xs font-bold uppercase tracking-widest text-proman-navy/60 mb-1">Voor wie</div>
+                  <p class="text-sm text-proman-navy/85 leading-relaxed">{brand.forWho}</p>
+                </div>
+                <ul class="grid sm:grid-cols-3 gap-4 mb-8">
+                  {brand.usps.map(u => (
+                    <li>
+                      <div class="text-2xl mb-1" aria-hidden="true">{u.icon}</div>
+                      <div class="font-bold text-sm mb-1">{u.title}</div>
+                      <div class="text-xs text-proman-navy/65 leading-relaxed">{u.body}</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-proman-navy/10">
+                <a
+                  href={`/merken/${brand.slug}/`}
+                  class:list={['inline-flex items-center gap-2 font-bold transition-colors', c.accent, 'hover:underline']}
+                >
+                  Ontdek {brand.name}
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+                <span class="text-proman-navy/30">·</span>
+                <a href="/offerte/" class="inline-flex items-center gap-2 text-sm text-proman-navy/70 hover:text-proman-navy">
+                  Offerte voor dit merk
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,171 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTASection from '../../components/CTASection.astro';
+import { sectors, getSector } from '../../data/sectors.ts';
+import { brands } from '../../data/brands.ts';
+import { services } from '../../data/services.ts';
+import { faqSchema, breadcrumbSchema } from '../../utils/seo.ts';
+
+export function getStaticPaths() {
+  return sectors.map(s => ({ params: { slug: s.slug } }));
+}
+
+const { slug } = Astro.params;
+const sector = getSector(slug!)!;
+const linkedBrands = brands.filter(b => sector.brands.includes(b.slug));
+const linkedServices = services.filter(s => sector.services.includes(s.slug));
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Sectoren', url: 'https://zakelijk.proman.be/sectoren/' },
+  { name: sector.name, url: `https://zakelijk.proman.be/sectoren/${sector.slug}/` },
+];
+---
+
+<Base
+  title={sector.seo.title}
+  description={sector.seo.description}
+  schema={[faqSchema(sector.faqs), breadcrumbSchema(breadcrumbs)]}
+>
+  <section class:list={['relative overflow-hidden bg-gradient-to-br', sector.bgGradient, 'text-white']}>
+    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <div class="container-app py-12 md:py-20 lg:py-24 relative">
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center gap-2 text-xs flex-wrap text-white/70">
+          {breadcrumbs.map((bc, i) => (
+            <li class="flex items-center gap-2">
+              {i > 0 && <span aria-hidden="true">›</span>}
+              {i < breadcrumbs.length - 1 ? (
+                <a href={bc.url} class="hover:text-white">{bc.name}</a>
+              ) : (
+                <span class="text-white/95">{bc.name}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <div class="text-6xl md:text-7xl mb-4">{sector.icon}</div>
+      <span class="eyebrow inline-block mb-4 text-white/80">Sector</span>
+      <h1 class="heading-xl mb-4 max-w-4xl text-balance">{sector.name}</h1>
+      <p class="lead text-white/90 max-w-3xl text-balance mb-8">{sector.tagline}</p>
+      <p class="text-base md:text-lg text-white/80 max-w-3xl leading-relaxed mb-8 text-balance">{sector.pitch}</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="/offerte/" class="bg-white text-proman-navy hover:bg-proman-cream font-bold px-6 py-3.5 rounded-lg transition-colors inline-flex items-center gap-2">
+          Vraag offerte voor {sector.name.toLowerCase()}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Uitdagingen -->
+  <section class="section bg-white">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Uitdagingen</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">De HR-uitdagingen in {sector.name.toLowerCase()}</h2>
+        <p class="lead text-balance">Wat we tegenkomen wanneer we werkgevers in deze sector helpen — en hoe we het aanpakken.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {sector.challenges.map((ch, i) => (
+          <div class="card card-padding">
+            <div class="text-3xl font-extrabold text-proman-orange/30 mb-2">{(i + 1).toString().padStart(2, '0')}</div>
+            <h3 class="font-bold text-lg mb-2">{ch.title}</h3>
+            <p class="text-sm text-proman-navy/75 leading-relaxed">{ch.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Profielen die we plaatsen -->
+  <section class="section bg-proman-cream">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Profielen</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">Welke profielen we plaatsen in {sector.name.toLowerCase()}</h2>
+        <p class="lead text-balance">{sector.profiles.length}+ functietypes, van junior tot directie. Voor elke wij een gespecialiseerde consulent.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {sector.profiles.map(p => (
+          <div class="bg-white border border-proman-navy/10 rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2">
+            <svg class="w-4 h-4 text-proman-orange shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            {p}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases -->
+  <section class="section bg-white">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Cases</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">Resultaten in {sector.name.toLowerCase()}</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {sector.cases.map(cs => (
+          <div class="card card-padding">
+            <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4 bg-proman-orange/10 text-proman-orange-dark">
+              {sector.name}
+            </div>
+            <p class="text-base text-proman-navy/85 leading-relaxed mb-4">{cs.client}</p>
+            <p class="font-bold text-lg text-balance">{cs.result}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Merken -->
+  {linkedBrands.length > 0 && (
+    <section class="section bg-proman-cream">
+      <div class="container-app">
+        <div class="max-w-3xl mb-8">
+          <span class="eyebrow text-proman-orange">Onze merken in deze sector</span>
+          <h2 class="heading-md mt-3 mb-4 text-balance">Welke PROMAN-merken werken in {sector.name.toLowerCase()}?</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {linkedBrands.map(b => (
+            <a href={`/merken/${b.slug}/`} class="card card-padding hover:border-proman-orange transition-colors group">
+              <h3 class="font-bold text-lg mb-2 group-hover:text-proman-orange transition-colors">{b.name}</h3>
+              <p class="text-sm text-proman-navy/70 leading-relaxed">{b.tagline}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Diensten -->
+  {linkedServices.length > 0 && (
+    <section class="section bg-white">
+      <div class="container-app">
+        <div class="max-w-3xl mb-8">
+          <span class="eyebrow text-proman-orange">Welke diensten</span>
+          <h2 class="heading-md mt-3 mb-4 text-balance">Diensten gevraagd in {sector.name.toLowerCase()}</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          {linkedServices.map(s => (
+            <a href={`/diensten/${s.slug}/`} class="inline-flex items-center gap-2 bg-white border border-proman-navy/15 hover:border-proman-orange rounded-full px-5 py-2.5 font-semibold text-sm transition-colors">
+              <span>{s.icon}</span>
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <FAQ
+    title={`Veelgestelde vragen over ${sector.name.toLowerCase()}`}
+    faqs={sector.faqs}
+  />
+  <CTASection
+    title={`Klaar voor personeel in ${sector.name.toLowerCase()}?`}
+    subtitle="Een sectorspecialist contacteert je binnen 1 werkdag voor een concreet voorstel."
+  />
+</Base>

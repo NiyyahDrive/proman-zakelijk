@@ -1,0 +1,77 @@
+---
+import { brands } from '../data/brands.ts';
+import { services } from '../data/services.ts';
+import { sectors } from '../data/sectors.ts';
+import { regions } from '../data/regions.ts';
+---
+
+<footer class="bg-proman-navy-dark text-white/70 text-sm mt-auto">
+  <div class="container-app py-12 md:py-16 grid lg:grid-cols-5 gap-8">
+    <div class="lg:col-span-2">
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-proman-orange flex items-center justify-center text-white font-extrabold">P</div>
+        <div class="leading-none">
+          <span class="font-extrabold text-white text-xl">PROMAN</span>
+          <div class="text-xs font-semibold text-proman-orange-light uppercase tracking-widest mt-0.5">Zakelijk</div>
+        </div>
+      </div>
+      <p class="text-white/60 mb-4 max-w-xs leading-relaxed">
+        De B2B-partner van werkgevers in België. 4e grootste HR-speler van Europa, 100% familiebedrijf, 170+ kantoren lokaal.
+      </p>
+      <div class="space-y-2 text-sm">
+        <a href="tel:+3221234567" class="block text-white hover:text-proman-orange-light font-semibold">+32 2 123 45 67</a>
+        <a href="mailto:zakelijk@proman.be" class="block text-white/70 hover:text-white">zakelijk@proman.be</a>
+        <p class="text-white/50">Tervurenlaan 100, 1040 Brussel</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="font-bold text-white mb-3">Diensten</div>
+      <ul class="space-y-1.5">
+        {services.map(s => (
+          <li><a href={`/diensten/${s.slug}/`} class="hover:text-white">{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-bold text-white mb-3">Merken</div>
+      <ul class="space-y-1.5">
+        {brands.map(b => (
+          <li><a href={`/merken/${b.slug}/`} class="hover:text-white">{b.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-bold text-white mb-3">Sectoren</div>
+      <ul class="space-y-1.5">
+        {sectors.slice(0, 7).map(s => (
+          <li><a href={`/sectoren/${s.slug}/`} class="hover:text-white">{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-app py-6">
+      <div class="font-bold text-white mb-3 text-sm">Regio's</div>
+      <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs">
+        {regions.map(r => (
+          <a href={`/regios/${r.slug}/`} class="hover:text-white">{r.name}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-app py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
+      <div>© 2026 PROMAN Belgium. Alle rechten voorbehouden. Erkenningsnummers VG.123/U, W.RS.456, B-AA.789.</div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-white">Algemene voorwaarden</a>
+        <a href="#" class="hover:text-white">Privacy</a>
+        <a href="#" class="hover:text-white">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>

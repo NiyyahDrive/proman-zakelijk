@@ -1,0 +1,8 @@
+Placeholder. In productie: vervang door echte 1200x630 OG-image (PNG/JPG) die navigeerbaar is op /og-default.png.
+
+Tools om snel te genereren:
+- og-image.com/playground
+- bannerbear.com
+- Of via Figma met PROMAN-template
+
+Inhoud: PROMAN-logo, hoofdtitel "Voor werkgevers in België", subtitle, en 3 kerncijfers (170+ kantoren, 48u, 50.000+ klanten).

@@ -1,0 +1,96 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { brands } from '../../data/brands.ts';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+export async function getStaticPaths() {
+  const allCases = await getCollection('cases');
+  return allCases.map(c => ({ params: { slug: c.slug }, props: { entry: c } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const brand = brands.find(b => b.slug === entry.data.brand);
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Cases', url: 'https://zakelijk.proman.be/cases/' },
+  { name: entry.data.title, url: `https://zakelijk.proman.be/cases/${entry.slug}/` },
+];
+---
+
+<Base
+  title={`${entry.data.title} | Case PROMAN`}
+  description={entry.data.description}
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow={`Case · ${entry.data.industry}`}
+    title={entry.data.title}
+    subtitle={entry.data.description}
+    breadcrumbs={breadcrumbs}
+  >
+    <div class="grid sm:grid-cols-3 gap-6 mt-12 max-w-2xl">
+      {entry.data.metrics.map(m => (
+        <div>
+          <div class="text-3xl md:text-4xl font-extrabold text-proman-orange-light">{m.value}</div>
+          <div class="text-sm text-white/70 mt-1">{m.label}</div>
+        </div>
+      ))}
+    </div>
+  </PageHero>
+
+  <section class="section bg-white">
+    <div class="container-narrow grid lg:grid-cols-[1fr_280px] gap-12">
+      <article class="prose prose-lg max-w-none">
+        <Content />
+      </article>
+      <aside class="lg:sticky lg:top-24 lg:self-start space-y-6">
+        <div class="card card-padding">
+          <div class="text-xs uppercase tracking-widest text-proman-orange font-bold mb-3">Case-info</div>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="text-proman-navy/60 mb-0.5">Klant</dt>
+              <dd class="font-semibold">{entry.data.client}</dd>
+            </div>
+            <div>
+              <dt class="text-proman-navy/60 mb-0.5">Sector</dt>
+              <dd class="font-semibold capitalize">{entry.data.industry}</dd>
+            </div>
+            <div>
+              <dt class="text-proman-navy/60 mb-0.5">Regio</dt>
+              <dd class="font-semibold capitalize">{entry.data.region}</dd>
+            </div>
+            <div>
+              <dt class="text-proman-navy/60 mb-0.5">Diensten</dt>
+              <dd class="space-y-1">
+                {entry.data.services.map(s => (
+                  <a href={`/diensten/${s}/`} class="block text-proman-orange hover:underline capitalize">{s.replace(/-/g, ' ')}</a>
+                ))}
+              </dd>
+            </div>
+            {brand && (
+              <div>
+                <dt class="text-proman-navy/60 mb-0.5">Merk</dt>
+                <dd>
+                  <a href={`/merken/${brand.slug}/`} class="font-semibold text-proman-orange hover:underline">{brand.name}</a>
+                </dd>
+              </div>
+            )}
+          </dl>
+        </div>
+        <a href="/offerte/" class="block btn-primary w-full text-center">
+          Vraag offerte voor jouw case
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <CTASection
+    title="Klaar voor jouw eigen case?"
+    subtitle="Vraag offerte op maat. We luisteren naar jouw uitdaging en komen met een concreet voorstel."
+  />
+</Base>

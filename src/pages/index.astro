@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import BrandShowcase from '../components/BrandShowcase.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import SectorGrid from '../components/SectorGrid.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FAQ from '../components/FAQ.astro';
+import CTASection from '../components/CTASection.astro';
+import { organizationSchema, faqSchema } from '../utils/seo.ts';
+
+const pageFaqs = [
+  {
+    q: 'Wat maakt PROMAN anders dan Randstad, Adecco of Manpower?',
+    a: 'Drie dingen: lokale verankering met 170+ Belgische kantoren waar consulenten effectief jouw werkvloer kennen, zes gespecialiseerde merken voor verschillende soorten HR-vragen (in plaats van één generieke benadering), en een familiebedrijf-structuur waardoor we niet hoeven te kijken naar kwartaalcijfers maar naar lange-termijnrelaties. Dat vertaalt zich in 92% klant-retentie na 12 maanden.',
+  },
+  {
+    q: 'Hoe snel kan PROMAN starten?',
+    a: 'Voor uitzendvragen: typisch 24-48 uur tot starter op de werkvloer. Voor werving en selectie: shortlist binnen 2 weken. Voor executive search: shortlist binnen 21 dagen. We kennen de doorlooptijden van onze concurrenten en zijn structureel sneller op de meeste profielen.',
+  },
+  {
+    q: 'Wat is het kostenmodel?',
+    a: 'Voor uitzendarbeid: brutoloon × coëfficiënt (typisch 1.55-1.75). Voor werving: 18-25% van bruto-jaarloon (no-cure-no-pay) of retainer voor schaarse profielen. Voor payroll: percentage of vast bedrag per loonbrief. Voor executive search: 30-35% retainer-model. Vraag een offerte op maat — alle prijzen vooraf transparant.',
+  },
+  {
+    q: 'In welke regio\'s is PROMAN actief?',
+    a: 'In heel België met 170+ lokale kantoren — van Oostende tot Aarlen, van Antwerpen tot Charleroi. Onze grootste regio\'s qua kantoordichtheid: Antwerpen (18), Hainaut (18), West-Vlaanderen (16) en Oost-Vlaanderen (14). In heel Wallonië, Brussel én Vlaanderen werken we tweetalig.',
+  },
+];
+---
+
+<Base
+  title="PROMAN Zakelijk — HR-partner voor werkgevers in België"
+  description="Uitzend, werving, payroll, executive search en outplacement onder één dak. Zes gespecialiseerde merken, 170+ lokale kantoren, antwoord binnen 24 uur."
+  schema={[organizationSchema(), faqSchema(pageFaqs)]}
+>
+  <Hero />
+  <TrustStrip />
+  <BrandShowcase />
+  <ServiceGrid />
+  <SectorGrid />
+  <HowItWorks />
+  <Testimonials />
+  <FAQ
+    title="Veelgestelde vragen van werkgevers"
+    subtitle="De vier vragen die we het vaakst krijgen tijdens kennismaking. Voor specifieke vragen: bel of vraag een gesprek."
+    faqs={pageFaqs}
+  />
+  <CTASection />
+</Base>

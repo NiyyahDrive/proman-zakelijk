@@ -1,0 +1,40 @@
+---
+import { sectors } from '../data/sectors.ts';
+---
+
+<section class="section bg-white">
+  <div class="container-app">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="eyebrow text-proman-orange">Sectoren</span>
+      <h2 class="heading-lg mt-3 mb-4 text-balance">
+        We kennen jouw werkvloer
+      </h2>
+      <p class="lead text-balance">
+        Een operator in de voeding is geen operator in de petrochemie. Een nurse in een WZC is geen nurse in een ziekenhuis. Onze sectorconsulenten kennen het verschil.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      {sectors.map(s => (
+        <a
+          href={`/sectoren/${s.slug}/`}
+          class="card group overflow-hidden p-0"
+        >
+          <div class:list={['bg-gradient-to-br', s.bgGradient, 'p-6 md:p-7 min-h-[160px] flex flex-col justify-between text-white']}>
+            <div class="text-3xl">{s.icon}</div>
+            <div>
+              <h3 class="font-bold text-lg leading-tight">{s.name}</h3>
+              <p class="text-sm text-white/80 mt-1 leading-relaxed line-clamp-2">{s.tagline}</p>
+            </div>
+          </div>
+          <div class="p-5 flex items-center justify-between text-sm">
+            <span class="text-proman-navy/60">{s.profiles.length}+ profielen</span>
+            <span class="text-proman-orange font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+              Ontdek <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

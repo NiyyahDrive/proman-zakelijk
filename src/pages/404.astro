@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Pagina niet gevonden | PROMAN Zakelijk"
+  description="De pagina die je zoekt bestaat niet. Hier zijn enkele links om verder te gaan."
+>
+  <section class="section text-center">
+    <div class="container-narrow">
+      <div class="text-8xl md:text-9xl font-extrabold text-proman-orange mb-4">404</div>
+      <h1 class="heading-lg mb-4 text-balance">Deze pagina bestaat niet</h1>
+      <p class="lead mb-10 text-balance">
+        Misschien heb je een verouderde link gevolgd, of is de pagina verplaatst. Hieronder enkele plekken om verder te zoeken.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-3 max-w-lg mx-auto">
+        <a href="/" class="btn-primary">Naar home</a>
+        <a href="/diensten/" class="btn-ghost">Bekijk diensten</a>
+        <a href="/merken/" class="btn-ghost">Bekijk merken</a>
+        <a href="/offerte/" class="btn-ghost">Vraag offerte</a>
+      </div>
+    </div>
+  </section>
+</Base>

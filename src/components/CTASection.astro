@@ -1,0 +1,40 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryCTA?: string;
+  primaryHref?: string;
+  secondaryCTA?: string;
+  secondaryHref?: string;
+}
+
+const {
+  title = 'Klaar om je HR-uitdaging op te lossen?',
+  subtitle = 'Vraag een offerte op maat. Een lokale consulent contacteert je binnen 1 werkdag — zonder verkooppraat.',
+  primaryCTA = 'Vraag een offerte',
+  primaryHref = '/offerte/',
+  secondaryCTA = 'Bel direct',
+  secondaryHref = 'tel:+3221234567',
+} = Astro.props;
+---
+
+<section class="section">
+  <div class="container-app">
+    <div class="bg-gradient-to-br from-proman-navy via-proman-navy to-proman-navy-dark rounded-3xl p-8 md:p-12 lg:p-16 text-white relative overflow-hidden">
+      <div class="absolute -top-32 -right-32 w-96 h-96 bg-proman-orange/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-3xl">
+        <h2 class="heading-lg mb-4 text-balance">{title}</h2>
+        <p class="lead text-white/80 mb-8 text-balance">{subtitle}</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={primaryHref} class="btn-primary btn-large">
+            {primaryCTA}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href={secondaryHref} class="border-2 border-white/30 hover:border-white text-white font-semibold px-6 py-4 rounded-lg transition-colors text-center">
+            {secondaryCTA}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

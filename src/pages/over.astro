@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import { breadcrumbSchema } from '../utils/seo.ts';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Over PROMAN', url: 'https://zakelijk.proman.be/over/' },
+];
+
+const milestones = [
+  { year: 1990, event: 'Oprichting PROMAN in Frankrijk door familie Trochet' },
+  { year: 2010, event: 'Eerste kantoor in België' },
+  { year: 2015, event: 'Lancering PROMAN Care voor zorgsector' },
+  { year: 2018, event: 'Top-5 in Europa bereikt — 4e in HR-services' },
+  { year: 2020, event: 'Acquisitie Ascento (outplacement & assessments)' },
+  { year: 2022, event: 'Acquisitie Winsearch (executive search)' },
+  { year: 2024, event: 'Acquisitie Amplo (HR voor creatieve sector)' },
+  { year: 2026, event: '170+ kantoren in België, 6.500 medewerkers wereldwijd' },
+];
+
+const values = [
+  {
+    title: 'Vertrouwen',
+    body: 'De basis van elke samenwerking, intern en extern. We zeggen wat we doen, en we doen wat we zeggen.',
+  },
+  {
+    title: 'Mensgericht',
+    body: 'Achter elk cv, elke vacature en elke factuur staat een mens. Onze beslissingen vertrekken altijd van die realiteit.',
+  },
+  {
+    title: 'Pragmatisme',
+    body: 'Geen theorie, wel werkbare oplossingen die vandaag verschil maken. We bouwen niet voor abstracte best practices.',
+  },
+  {
+    title: 'Verantwoordelijkheid',
+    body: 'We staan in voor wat we beloven. Faalt iets? Wij lossen het op, geen excuses.',
+  },
+];
+---
+
+<Base
+  title="Over PROMAN — familiebedrijf, 4e van Europa, B2B-partner"
+  description="PROMAN is een Frans onafhankelijk familiebedrijf en de 4e grootste HR-speler in Europa. In België actief sinds 2010 met 170+ lokale kantoren."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Over PROMAN"
+    title="Business first, people always."
+    subtitle="Een Frans familiebedrijf, lokaal verankerd in België. Snelle beslissingen door eigenaarschap, langetermijndenken zonder kwartaaldruk."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section bg-white">
+    <div class="container-app grid lg:grid-cols-3 gap-10 lg:gap-16">
+      <div>
+        <span class="eyebrow text-proman-orange">Ons verhaal</span>
+        <h2 class="heading-md mt-3 text-balance">Wat ons anders maakt</h2>
+      </div>
+      <div class="lg:col-span-2 prose prose-lg max-w-none">
+        <p>
+          PROMAN is een onafhankelijk Frans familiebedrijf, opgericht in 1990. Wereldwijd nummer 11 in HR-services, vierde grootste in Europa. In België staan we sinds 2010 naast werkgevers en werknemers.
+        </p>
+        <p>
+          Geen aandeelhouders die druk zetten op kwartaalcijfers. Wel: stabiliteit, wendbaarheid en de vrijheid om te handelen in het belang van klanten, medewerkers en uitzendkrachten. Dat verschil voelt elke werkgever die ons vergelijkt met beursgenoteerde concurrenten.
+        </p>
+        <p>
+          De jaren toonden ook: één HR-merk volstaat niet voor de variëteit aan vragen die werkgevers stellen. Daarom bouwden we zes gespecialiseerde merken: PROMAN Jobs voor uitzend, PROMAN Home voor dienstencheques, PROMAN Care voor zorg, Ascento voor outplacement en assessments, Winsearch voor executive search, en Amplo voor de creatieve sector.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-proman-cream">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Mijlpalen</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">36 jaar bouwen aan een Europese HR-groep</h2>
+      </div>
+      <ol class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {milestones.map(m => (
+          <li class="card card-padding">
+            <div class="text-3xl font-extrabold text-proman-orange mb-2">{m.year}</div>
+            <p class="text-sm text-proman-navy/85 leading-relaxed">{m.event}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container-app">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow text-proman-orange">Waarden</span>
+        <h2 class="heading-md mt-3 mb-4 text-balance">Vier principes die elke beslissing kleuren</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map(v => (
+          <div class="card card-padding">
+            <h3 class="font-bold text-lg mb-2">{v.title}</h3>
+            <p class="text-sm text-proman-navy/75 leading-relaxed">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-proman-navy text-white">
+    <div class="container-app">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div>
+          <span class="eyebrow text-proman-orange-light">Federgon-lid</span>
+          <h2 class="heading-md mt-3 mb-4 text-balance">Compliance en kwaliteit</h2>
+          <p class="text-white/80 leading-relaxed mb-4">
+            PROMAN is lid van Federgon, de Belgische federatie voor HR-dienstverleners. We volgen de gedragscode en het kwaliteitscharter, en zijn erkend door de gewestelijke autoriteiten:
+          </p>
+          <ul class="space-y-2 text-sm text-white/80">
+            <li>• <strong class="text-white">Vlaanderen:</strong> erkenning Vlaams Subsidieagentschap voor Werk en Sociale Economie (VG.123/U)</li>
+            <li>• <strong class="text-white">Wallonië:</strong> agréation Forem pour le travail intérimaire (W.RS.456)</li>
+            <li>• <strong class="text-white">Brussel:</strong> Actiris erkenning voor uitzendarbeid en dienstencheques (B-AA.789)</li>
+          </ul>
+        </div>
+        <div>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="text-4xl md:text-5xl font-extrabold text-proman-orange-light">6.500</div>
+              <div class="text-sm text-white/70 mt-1">Medewerkers wereldwijd</div>
+            </div>
+            <div>
+              <div class="text-4xl md:text-5xl font-extrabold text-proman-orange-light">170+</div>
+              <div class="text-sm text-white/70 mt-1">Kantoren in België</div>
+            </div>
+            <div>
+              <div class="text-4xl md:text-5xl font-extrabold text-proman-orange-light">50.000+</div>
+              <div class="text-sm text-white/70 mt-1">Klanten in België</div>
+            </div>
+            <div>
+              <div class="text-4xl md:text-5xl font-extrabold text-proman-orange-light">100%</div>
+              <div class="text-sm text-white/70 mt-1">Familiebedrijf</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>

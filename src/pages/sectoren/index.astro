@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectorGrid from '../../components/SectorGrid.astro';
+import CTASection from '../../components/CTASection.astro';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Sectoren', url: 'https://zakelijk.proman.be/sectoren/' },
+];
+---
+
+<Base
+  title="Sectoren — gespecialiseerd HR voor 7 industrieën"
+  description="PROMAN werkt sectorspecialistisch: industrie, logistiek, bouw, IT, zorg, retail en finance. Lokale consulenten kennen de werkvloer en de cao\'s."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Sectoren"
+    title="We kennen jouw werkvloer"
+    subtitle="Een operator in de voeding is geen operator in de petrochemie. Een verpleegkundige in een WZC is geen verpleegkundige in een ziekenhuis. Onze sectorspecialisten kennen het verschil."
+    breadcrumbs={breadcrumbs}
+  />
+  <SectorGrid />
+  <CTASection />
+</Base>

@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { regions } from '../../data/regions.ts';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Regio\'s', url: 'https://zakelijk.proman.be/regios/' },
+];
+---
+
+<Base
+  title="Regio's — PROMAN in heel België, 170+ kantoren"
+  description="Lokale uitzend- en wervingsbureaus van PROMAN in alle Belgische provincies. Vlaanderen, Brussel, Wallonië — overal lokale consulenten die de regio kennen."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Regio's"
+    title="Lokaal aanwezig, in heel België"
+    subtitle="170+ kantoren in alle Belgische provincies. Onze consulenten kennen de bedrijven, de werkvloeren en de mensen in jouw regio. Hieronder: een overzicht per provincie."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section bg-white">
+    <div class="container-app">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {regions.map(r => (
+          <a href={`/regios/${r.slug}/`} class="card card-padding hover:border-proman-orange transition-colors group">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-xl group-hover:text-proman-orange transition-colors">{r.name}</h3>
+              <span class="text-xs bg-proman-cream text-proman-navy/70 font-semibold px-2 py-1 rounded">{r.offices} kantoren</span>
+            </div>
+            <p class="text-sm text-proman-navy/70 leading-relaxed mb-3 line-clamp-2">{r.pitch.split('.')[0]}.</p>
+            <div class="text-xs text-proman-navy/50 mb-4">
+              {r.cities.slice(0, 4).join(' · ')}
+            </div>
+            <div class="text-sm font-semibold text-proman-orange flex items-center gap-1 group-hover:gap-2 transition-all">
+              Verken regio →
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>

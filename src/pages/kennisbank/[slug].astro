@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+export async function getStaticPaths() {
+  const all = await getCollection('articles');
+  return all.map(a => ({ params: { slug: a.slug }, props: { entry: a } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Kennisbank', url: 'https://zakelijk.proman.be/kennisbank/' },
+  { name: entry.data.title, url: `https://zakelijk.proman.be/kennisbank/${entry.slug}/` },
+];
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  title={`${entry.data.title} | PROMAN Kennisbank`}
+  description={entry.data.description}
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow={`Kennisbank · ${entry.data.category}`}
+    title={entry.data.title}
+    subtitle={entry.data.description}
+    breadcrumbs={breadcrumbs}
+  >
+    <div class="flex items-center gap-4 mt-8 text-sm text-white/70">
+      <span>{formatDate(entry.data.publishedAt)}</span>
+      <span>·</span>
+      <span>{entry.data.readingTime} min lezen</span>
+      <span>·</span>
+      <span>{entry.data.author}</span>
+    </div>
+  </PageHero>
+
+  <section class="section bg-white">
+    <div class="container-narrow grid lg:grid-cols-[1fr_240px] gap-12">
+      <article class="prose prose-lg max-w-none">
+        <Content />
+      </article>
+      <aside class="lg:sticky lg:top-24 lg:self-start space-y-6">
+        <div class="card card-padding">
+          <div class="text-xs uppercase tracking-widest text-proman-orange font-bold mb-3">Tags</div>
+          <div class="flex flex-wrap gap-2">
+            {entry.data.tags.map(t => (
+              <span class="bg-proman-cream text-proman-navy text-xs px-3 py-1 rounded-full">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div class="card card-padding bg-proman-navy text-white">
+          <h3 class="font-bold mb-2">Meer weten?</h3>
+          <p class="text-sm text-white/80 mb-4">Onze consulenten beantwoorden graag je vragen — zonder verkooppraat.</p>
+          <a href="/offerte/" class="block bg-proman-orange text-white text-center font-bold py-2.5 rounded-lg">
+            Vraag gesprek aan
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>

@@ -1,0 +1,31 @@
+---
+const stats = [
+  { v: '50.000+', l: 'klanten in België' },
+  { v: '6.500', l: 'medewerkers wereldwijd' },
+  { v: '4e', l: 'grootste van Europa' },
+  { v: '100%', l: 'familiebedrijf' },
+  { v: '4.6/5', l: 'op Trustpilot' },
+];
+const trustedBy = ['Bekaert', 'Colruyt', 'UCB', 'Solvay', 'Engie', 'BNP Paribas Fortis', 'Carrefour', 'Atlas Copco'];
+---
+
+<section class="bg-white border-y border-proman-navy/10">
+  <div class="container-app py-10 md:py-12">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 items-center mb-8">
+      {stats.map(s => (
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-extrabold text-proman-orange leading-none">{s.v}</div>
+          <div class="text-[11px] md:text-xs text-proman-navy/60 uppercase tracking-wide mt-1">{s.l}</div>
+        </div>
+      ))}
+    </div>
+    <div class="pt-6 border-t border-proman-navy/10">
+      <div class="text-xs text-center text-proman-navy/40 uppercase tracking-widest mb-4">Vertrouwd door werkgevers als</div>
+      <div class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-10 gap-y-3 opacity-60">
+        {trustedBy.map(name => (
+          <div class="font-bold text-proman-navy/50 text-sm tracking-wide">{name}</div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

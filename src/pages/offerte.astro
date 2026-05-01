@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbSchema } from '../utils/seo.ts';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Offerte aanvragen', url: 'https://zakelijk.proman.be/offerte/' },
+];
+---
+
+<Base
+  title="Offerte aanvragen — PROMAN Zakelijk"
+  description="Vraag een offerte op maat aan voor uitzendarbeid, werving, payroll, executive search of outplacement. Antwoord binnen 1 werkdag, geen verplichting."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+  noSticky={true}
+>
+  <section class="bg-gradient-to-br from-proman-navy via-proman-navy to-proman-navy-dark text-white pt-12 md:pt-20 pb-8">
+    <div class="container-app">
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center gap-2 text-xs text-white/60">
+          <li><a href="/" class="hover:text-white">Home</a></li>
+          <li>›</li>
+          <li class="text-white/90">Offerte aanvragen</li>
+        </ol>
+      </nav>
+      <h1 class="heading-xl mb-4 max-w-3xl text-balance">Vraag een offerte op maat</h1>
+      <p class="lead text-white/85 max-w-2xl text-balance">
+        Vertel kort wat je nodig hebt. Een lokale consulent met ervaring in jouw sector belt binnen 1 werkdag terug — zonder verkooppraat.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-gradient-to-b from-proman-navy-dark to-white pb-16 -mt-1">
+    <div class="container-app pt-10">
+      <div class="grid lg:grid-cols-[1fr_360px] gap-10 lg:gap-16">
+        <form class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 space-y-5" data-offer-form>
+          <div>
+            <h2 class="heading-sm mb-1">Jouw vraag in 2 minuten</h2>
+            <p class="text-sm text-proman-navy/60">Velden met * zijn verplicht. Hoe specifieker, hoe sneller we kunnen antwoorden.</p>
+          </div>
+
+          <div>
+            <label for="org-type" class="block text-sm font-bold mb-2">Wat zoek je vooral? *</label>
+            <select id="org-type" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange focus:border-proman-orange outline-none">
+              <option value="">Selecteer een dienst</option>
+              <option>Tijdelijk personeel (uitzendarbeid)</option>
+              <option>Vaste werving (werving en selectie)</option>
+              <option>Payroll-uitbesteding</option>
+              <option>Executive search / C-level</option>
+              <option>Outplacement (groep of individueel)</option>
+              <option>Talent assessment</option>
+              <option>Iets anders / ik wil eerst advies</option>
+            </select>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="profile" class="block text-sm font-bold mb-2">Welk profiel? *</label>
+              <input id="profile" type="text" required placeholder="bv. magazijniers, lassers, CFO" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+            <div>
+              <label for="volume" class="block text-sm font-bold mb-2">Aantal mensen / volume *</label>
+              <input id="volume" type="text" required placeholder="bv. 1, 5-10, 50+" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="region" class="block text-sm font-bold mb-2">Regio / locatie *</label>
+              <input id="region" type="text" required placeholder="bv. Antwerpen, Charleroi, hele land" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+            <div>
+              <label for="urgency" class="block text-sm font-bold mb-2">Wanneer nodig? *</label>
+              <select id="urgency" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none">
+                <option value="">Selecteer urgentie</option>
+                <option>Binnen 24-48 uur</option>
+                <option>Deze of volgende week</option>
+                <option>Binnen de maand</option>
+                <option>Binnen 3 maanden</option>
+                <option>Strategische oriëntatie, niet urgent</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-bold mb-2">Extra context (optioneel)</label>
+            <textarea id="message" rows="4" placeholder="Bv. paritaire comité, specifieke vereisten, eerdere ervaring met andere bureaus" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none resize-y"></textarea>
+          </div>
+
+          <hr class="border-proman-navy/10" />
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-sm font-bold mb-2">Naam *</label>
+              <input id="name" type="text" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+            <div>
+              <label for="company" class="block text-sm font-bold mb-2">Bedrijf *</label>
+              <input id="company" type="text" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="email" class="block text-sm font-bold mb-2">E-mail *</label>
+              <input id="email" type="email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-bold mb-2">Telefoon</label>
+              <input id="phone" type="tel" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-proman-orange outline-none" />
+            </div>
+          </div>
+
+          <button type="submit" class="w-full btn-primary py-4 text-base">
+            Verstuur aanvraag
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <p class="text-xs text-proman-navy/50 text-center">Door te versturen ga je akkoord met onze <a href="#" class="underline">privacy-voorwaarden</a>. Je gegevens worden niet gedeeld met derden.</p>
+        </form>
+
+        <aside class="space-y-5">
+          <div class="card card-padding bg-proman-cream border-proman-orange/30">
+            <div class="text-xs font-bold uppercase tracking-widest text-proman-orange mb-3">Wat je krijgt</div>
+            <ul class="space-y-3 text-sm">
+              <li class="flex gap-2">
+                <svg class="w-5 h-5 text-proman-orange shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong>Antwoord binnen 1 werkdag</strong> — meestal sneller</span>
+              </li>
+              <li class="flex gap-2">
+                <svg class="w-5 h-5 text-proman-orange shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong>Concreet voorstel</strong> met all-in tarief, geen verborgen kosten</span>
+              </li>
+              <li class="flex gap-2">
+                <svg class="w-5 h-5 text-proman-orange shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong>Lokale consulent</strong> uit jouw regio, met sectorkennis</span>
+              </li>
+              <li class="flex gap-2">
+                <svg class="w-5 h-5 text-proman-orange shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong>Geen verplichting</strong>, geen verkooppraat</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card card-padding">
+            <div class="text-xs font-bold uppercase tracking-widest text-proman-orange mb-3">Liever bellen?</div>
+            <a href="tel:+3221234567" class="block text-2xl font-extrabold text-proman-navy hover:text-proman-orange mb-1">02 123 45 67</a>
+            <p class="text-sm text-proman-navy/60 mb-3">Beschikbaar werkdagen 8u-18u, zaterdag 9u-13u.</p>
+            <a href="mailto:zakelijk@proman.be" class="text-sm text-proman-orange hover:underline">zakelijk@proman.be</a>
+          </div>
+
+          <div class="card card-padding bg-proman-navy text-white">
+            <div class="text-3xl font-extrabold text-proman-orange-light mb-1">92%</div>
+            <p class="text-sm text-white/80 leading-relaxed">van werkgevers die een eerste aanvraag deden, blijven na 12 maanden klant.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelector('form[data-offer-form]')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Demo: aanvraag verstuurd. In productie: connect met CRM (HubSpot/Salesforce) of email-API.');
+  });
+</script>

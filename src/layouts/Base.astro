@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyMobileCTA from '../components/StickyMobileCTA.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Schema.org JSON-LD objecten — array */
+  schema?: Record<string, any>[];
+  /** Canonical URL override */
+  canonical?: string;
+  /** OG-image override (default: /og-default.png) */
+  ogImage?: string;
+  /** Geen sticky mobile CTA tonen (bv. op contactpagina) */
+  noSticky?: boolean;
+}
+
+const {
+  title,
+  description,
+  schema = [],
+  canonical,
+  ogImage = '/og-default.png',
+  noSticky = false,
+} = Astro.props;
+
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1E2D5C" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:locale" content="nl_BE" />
+    <meta property="og:site_name" content="PROMAN Zakelijk" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org -->
+    {schema.map(s => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-proman-orange focus:text-white focus:px-4 focus:py-2 focus:rounded">
+      Naar inhoud
+    </a>
+    <Header />
+    <main id="main" class={`flex-1 ${noSticky ? '' : 'pb-20 md:pb-0'}`}>
+      <slot />
+    </main>
+    <Footer />
+    {!noSticky && <StickyMobileCTA />}
+    <script>
+      // Mobile menu toggle
+      const btn = document.querySelector('[data-menu-btn]');
+      const menu = document.querySelector('[data-menu]');
+      const closeBtn = document.querySelector('[data-menu-close]');
+      btn?.addEventListener('click', () => {
+        menu?.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden');
+      });
+      closeBtn?.addEventListener('click', () => {
+        menu?.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      });
+    </script>
+  </body>
+</html>

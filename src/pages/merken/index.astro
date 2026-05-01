@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import BrandShowcase from '../../components/BrandShowcase.astro';
+import CTASection from '../../components/CTASection.astro';
+import { breadcrumbSchema } from '../../utils/seo.ts';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://zakelijk.proman.be/' },
+  { name: 'Merken', url: 'https://zakelijk.proman.be/merken/' },
+];
+---
+
+<Base
+  title="Onze merken — PROMAN, Ascento, Winsearch, Amplo"
+  description="Zes gespecialiseerde HR-merken onder de PROMAN-vlag. Voor uitzend, werving, executive search, outplacement, dienstencheques en payroll."
+  schema={[breadcrumbSchema(breadcrumbs)]}
+>
+  <PageHero
+    eyebrow="Onze merken"
+    title="Zes gespecialiseerde merken, één PROMAN-aanpak"
+    subtitle="Elk merk is gebouwd voor één duidelijk type HR-vraag. Geen one-size-fits-all, wel diepe expertise per domein. Hieronder ontdek je welk merk past bij jouw vraag."
+    breadcrumbs={breadcrumbs}
+  />
+  <BrandShowcase />
+  <CTASection
+    title="Niet zeker welk merk je nodig hebt?"
+    subtitle="Vraag een gesprek aan. Op basis van jouw vraag verbinden we je met de juiste specialist binnen onze groep."
+  />
+</Base>
